@@ -16,7 +16,7 @@ This project predicts flight ticket prices based on user input such as airline, 
 - Input validation and error handling.
 - Easily retrain model with new data.
 
-### Frontend ([flight-prediction/src/App.jsx](flight-prediction/src/App.jsx))
+### Frontend ([flight-prediction/frontend/src/App.jsx](flight-prediction/frontend/src/App.jsx))
 - Modern, responsive UI built with ReactJS and Tailwind CSS.
 - Form for entering flight details:
   - Airline, source/destination city, departure/arrival time, stops, class, and date.
@@ -31,9 +31,9 @@ This project predicts flight ticket prices based on user input such as airline, 
 - **Python**: Backend, model training
 - **Flask**: REST API
 - **scikit-learn**: Machine learning
-- **ReactJS**: Frontend UI ([flight-prediction/src/App.jsx](flight-prediction/src/App.jsx))
-- **Tailwind CSS**: Styling ([flight-prediction/src/index.css](flight-prediction/src/index.css))
-- **Vite**: Frontend tooling ([flight-prediction/vite.config.js](flight-prediction/vite.config.js))
+- **ReactJS**: Frontend UI
+- **Tailwind CSS**: Styling 
+- **Vite**: Frontend tooling 
 
 ---
 
