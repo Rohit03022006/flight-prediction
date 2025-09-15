@@ -3,6 +3,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
+ENV REACT_APP_API_URL=http://flight-backend:5000
+
 RUN npm run build
 
 FROM nginx:stable-alpine
