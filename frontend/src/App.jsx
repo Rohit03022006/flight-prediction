@@ -46,10 +46,11 @@ function FlightPricePredictor() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/predict`,
+        const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/predict`,
         formData
       );
+
       setPrediction(response.data.prediction);
     } catch (error) {
       console.error("Error fetching prediction:", error);
