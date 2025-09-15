@@ -1,9 +1,7 @@
 __pycache__
 *.pyc
+*.pyo
+*.pyd
 .env
-venv
-dist
-build
-*.log
-*.sqlite3
-*.pkl       # remove this line if you want model included in image (recommended to include model)
+.git
+tests
