@@ -1,24 +1,17 @@
-# backend/Dockerfile
-FROM python:3.11-slim
-
-# system deps (if you need build tools for some libs)
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential gcc && \
-    rm -rf /var/lib/apt/lists/*
-
+# Stage 1: Build
+FROM python:3.11-slim AS builder
 WORKDIR /app
-
-# copy pip requirements first for layer caching
 COPY requirements.txt .
-
-# install deps
-RUN pip install --no-cache-dir -r requirements.txt
-
-# copy app and model
+RUN apt-get update && apt-get install -y build-essential gcc && \
+    pip install --prefix=/install --no-cache-dir -r requirements.txt && \
+    apt-get purge -y build-essential gcc && apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
 COPY . .
 
-# expose port used by your Flask app
+# Stage 2: Runtime
+FROM python:3.11-slim
+WORKDIR /app
+COPY --from=builder /install /usr/local
+COPY --from=builder /app /app
 EXPOSE 5000
-
-# production: use gunicorn
 CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app", "--workers", "3", "--threads", "4"]
