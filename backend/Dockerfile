@@ -1,30 +1,24 @@
-# Stage 1: Build - Use regular Python image for more space
-FROM python:3.11 AS builder
-
-WORKDIR /app
-COPY requirements.txt .
-
-# Install Python dependencies
-RUN pip install --prefix=/install --no-cache-dir -r requirements.txt
-
-# Copy app and model
-COPY . .
-
-# Stage 2: Runtime - Use slim for final image
+# backend/Dockerfile
 FROM python:3.11-slim
-WORKDIR /app
 
-# Copy installed Python packages from builder
-COPY --from=builder /install /usr/local
-
-# Copy application code
-COPY --from=builder /app /app
-
-# Install minimal runtime dependencies
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends libgomp1 && \
-    apt-get clean && \
+# system deps (if you need build tools for some libs)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential gcc && \
     rm -rf /var/lib/apt/lists/*
 
+WORKDIR /app
+
+# copy pip requirements first for layer caching
+COPY requirements.txt .
+
+# install deps
+RUN pip install --no-cache-dir -r requirements.txt
+
+# copy app and model
+COPY . .
+
+# expose port used by your Flask app
 EXPOSE 5000
+
+# production: use gunicorn
 CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app", "--workers", "3", "--threads", "4"]
