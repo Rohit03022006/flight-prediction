@@ -58,7 +58,7 @@ This project predicts flight ticket prices based on user input such as airline, 
    
    # On Windows
    python -m venv myenv
-   myenv\Scripts\activate
+   .\myenv\Scripts\activate
    ```
 
 3. **Install Python dependencies**:
