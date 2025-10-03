@@ -42,22 +42,25 @@ function FlightPricePredictor() {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-        const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/predict`,
-        formData
-      );
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  try {
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
+    
+    const response = await axios.post(
+      `${backendUrl}/predict`,
+      formData
+    );
 
-      setPrediction(response.data.prediction);
-    } catch (error) {
-      console.error("Error fetching prediction:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    setPrediction(response.data.prediction);
+  } catch (error) {
+    console.error("Error fetching prediction:", error);
+    alert("Failed to get prediction. Please check if the backend server is running.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   // Get airline logo based on selection
   const getAirlineLogo = () => {
