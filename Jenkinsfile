@@ -11,7 +11,7 @@ pipeline {
                 url: 'https://github.com/Rohit03022006/flight-prediction.git'
             }
         }
-        
+
         stage('Build and Push Docker Images') {
             steps {
                 withCredentials([usernamePassword(
@@ -20,62 +20,63 @@ pipeline {
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
                     sh """
-                    docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
-                    
-                    # Build and push backend
-                    docker build -t $BACKEND_IMAGE ./backend
-                    docker push $BACKEND_IMAGE
-                    
-                    # Build and push frontend
-                    docker build -t $FRONTEND_IMAGE ./frontend
-                    docker push $FRONTEND_IMAGE
+                        echo "\$DOCKER_PASS" | docker login -u "\$DOCKER_USER" --password-stdin
+
+                        # Build and push backend
+                        docker build -t \$BACKEND_IMAGE ./backend
+                        docker push \$BACKEND_IMAGE
+
+                        # Build and push frontend
+                        docker build -t \$FRONTEND_IMAGE ./frontend
+                        docker push \$FRONTEND_IMAGE
                     """
                 }
             }
         }
-        
+
         stage('Deploy Application') {
             steps {
                 // Stop and remove any existing containers
                 sh 'docker stop flight-frontend flight-backend flight-mongo || true'
                 sh 'docker rm flight-frontend flight-backend flight-mongo || true'
-                
-                // Start MongoDB
+
+                // start mongoDB
                 sh '''
-                docker run -d \
-                  --name flight-mongo \
-                  --restart unless-stopped \
-                  -v mongo-data:/data/db \
-                  -p 27017:27017 \
-                  mongo:6.0
+                    docker run -d \
+                      --name flight-mongo \
+                      --restart unless-stopped \
+                      -v mongo-data:/data/db \
+                      -p 27017:27017 \
+                      mongo:6.0
                 '''
-                
-                // Start Backend
+
+                // start backend
                 sh """
-                docker run -d \
-                  --name flight-backend \
-                  --restart unless-stopped \
-                  --link flight-mongo:mongo \
-                  -e MONGO_URI=mongodb://mongo:27017 \
-                  -e DB_NAME=flightdb \
-                  -e MODEL_PATH=/app/model.pkl \
-                  -p 5000:5000 \
-                  $BACKEND_IMAGE
+                    docker run -d \
+                      --name flight-backend \
+                      --restart unless-stopped \
+                      --link flight-mongo:mongo \
+                      -e MONGO_URI=mongodb://mongo:27017 \
+                      -e DB_NAME=flightdb \
+                      -e MODEL_PATH=/app/model.pkl \
+                      -p 5000:5000 \
+                      \$BACKEND_IMAGE
                 """
-                
-                // Start Frontend
+
+                // start frontend
                 sh """
-                docker run -d \
-                  --name flight-frontend \
-                  --restart unless-stopped \
-                  --link flight-backend:backend \
-                  -e REACT_APP_BACKEND_URL=http://flight-backend:5000 \
-                  -p 80:80 \
-                  $FRONTEND_IMAGE
+                    docker run -d \
+                      --name flight-frontend \
+                      --restart unless-stopped \
+                      --link flight-backend:backend \
+                      -e REACT_APP_BACKEND_URL=http://flight-backend:5000 \
+                      -p 80:80 \
+                      \$FRONTEND_IMAGE
                 """
             }
         }
     }
+
     post {
         failure {
             echo 'Pipeline failed! Check the logs for details.'
@@ -87,7 +88,6 @@ pipeline {
             sh 'docker ps --filter "name=flight-"'
         }
         always {
-            // Clean up credentials
             sh 'docker logout || true'
         }
     }
