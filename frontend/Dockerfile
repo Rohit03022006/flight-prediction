@@ -1,15 +1,16 @@
 FROM node:20-alpine AS build
+
+# Set environment variables for the build
+ENV REACT_APP_API_URL=http://localhost:5000
+
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-ENV REACT_APP_API_URL=http://localhost:5000
-
 RUN npm run build
 
 FROM nginx:stable-alpine
-
-RUN rm -rf /usr/share/nginx/html/*
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
