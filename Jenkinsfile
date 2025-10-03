@@ -69,7 +69,7 @@ pipeline {
                       --name flight-frontend \
                       --restart unless-stopped \
                       --link flight-backend:backend \
-                      -e REACT_APP_BACKEND_URL=http://flight-backend:5000 \
+                      -e REACT_APP_BACKEND_URL=http://localhost:5000 \
                       -p 80:80 \
                       \$FRONTEND_IMAGE
                 """
