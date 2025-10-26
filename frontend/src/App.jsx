@@ -95,28 +95,15 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
-    setPrediction(null);
-
     try {
-      const response = await axios.post(`${API_BASE_URL}/predict`, formData);
-      const newPrediction = {
-        ...response.data,
-        details: { ...formData },
-        timestamp: new Date().toISOString(),
-        id: Date.now(),
-      };
-
-      setPrediction(newPrediction);
-
-      const updatedHistory = [newPrediction, ...predictionHistory].slice(0, 10);
-      setPredictionHistory(updatedHistory);
-    } catch (err) {
-      console.error("Prediction error:", err);
-      setError(
-        err.response?.data?.error ||
-          "Failed to get prediction. Please try again."
+        const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/predict`,
+        formData
       );
+
+      setPrediction(response.data.prediction);
+    } catch (error) {
+      console.error("Error fetching prediction:", error);
     } finally {
       setLoading(false);
     }
