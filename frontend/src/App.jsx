@@ -299,48 +299,52 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-black text-l">
-           <div className="container mx-auto p-6 max-w-6xl">
-        {/* Header */}
-        <div className="text-center mb-12 pt-8">
-          <div className="flex items-center justify-center mb-4">
-            <div className="bg-black p-3 rounded-full mr-3 shadow-md">
-              <FaPlane className="text-2xl text-white transform -rotate-90" />
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-black">
-              Flight Price Predictor
-            </h1>
-          </div>
-          <p className="text-gray-700 max-w-2xl mx-auto text-lg">
-            Advanced AI-powered flight price predictions with historical data
-            analysis
-          </p>
+    <div className="min-h-screen bg-gray-50 text-slate-800 font-sans selection:bg-black selection:text-white">
+  <div className="container mx-auto p-4 md:p-8 max-w-7xl">
+    
+    <div className="text-center mb-12 pt-6">
+      <div className="inline-flex items-center justify-center mb-6 relative group">
+        <div className="absolute inset-0 bg-gray-200 rounded-full blur opacity-40 group-hover:opacity-60 transition-opacity duration-500"></div>
+        <div className="relative bg-black p-4 rounded-full mr-4 shadow-xl shadow-gray-400/20">
+          <FaPlane className="text-3xl text-white transform -rotate-90 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
         </div>
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-black">
+          Flight Price <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-700 to-black">Predictor</span>
+        </h1>
+      </div>
+      <p className="text-gray-500 max-w-2xl mx-auto text-lg md:text-xl font-light leading-relaxed">
+        Advanced AI-powered flight price predictions leveraging historical data analysis for smarter travel.
+      </p>
+    </div>
 
-        {/* Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Section */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Flight Details */}
-            <div className="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-all">
-              <h2 className="text-2xl font-semibold text-black mb-6 flex items-center border-b border-dashed border-gray-400 pb-2">
-                <FaPlane className="mr-3 text-black" />
-                Flight Details
-              </h2>
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <div className="lg:col-span-8 space-y-8">
+        
+        <div className="bg-white rounded-3xl shadow-xl shadow-gray-200/60 overflow-hidden border border-gray-100">
+          <div className="p-6 md:p-8">
+            <h2 className="text-2xl font-bold text-black mb-8 flex items-center">
+              <span className="bg-gray-100 p-2 rounded-lg mr-3">
+                <FaPlane className="text-gray-800 text-lg" />
+              </span>
+              Flight Parameters
+            </h2>
 
-              <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
-                  {/* Airline */}
-                  <div>
-                    <label className="text-sm font-medium mb-2 flex items-center text-gray-800">
-                      <FaPlane className="mr-2 text-black" /> Airline
-                    </label>
+            <form onSubmit={handleSubmit}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1">Airline</label>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <FaPlane className="text-gray-400 group-focus-within:text-black transition-colors" />
+                    </div>
                     <select
                       id="airline"
                       name="airline"
                       value={formData.airline}
                       onChange={handleChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-black focus:outline-none text-black"
+                      className="w-full pl-10 pr-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white text-gray-900 focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all duration-200 appearance-none cursor-pointer"
                       required
                     >
                       <option value="">Select Airline</option>
@@ -352,147 +356,14 @@ function App() {
                       <option value="Vistara">Vistara</option>
                     </select>
                   </div>
+                </div>
 
-                  {/* Source City */}
-                  <div>
-                    <label className="text-sm font-medium mb-2 flex items-center text-gray-800">
-                      <FaCity className="mr-2 text-black" /> Source City
-                    </label>
-                    <select
-                      id="source_city"
-                      name="source_city"
-                      value={formData.source_city}
-                      onChange={handleChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-black focus:outline-none text-black"
-                      required
-                    >
-                      <option value="">Select Source City</option>
-                      <option value="Delhi">Delhi</option>
-                      <option value="Mumbai">Mumbai</option>
-                      <option value="Bangalore">Bangalore</option>
-                      <option value="Kolkata">Kolkata</option>
-                      <option value="Hyderabad">Hyderabad</option>
-                      <option value="Chennai">Chennai</option>
-                    </select>
-                  </div>
-
-                  {/* Destination City */}
-                  <div className="relative">
-                    <label className="text-sm font-medium mb-2 flex items-center text-gray-800">
-                      <FaMapMarkerAlt className="mr-2 text-black" /> Destination City
-                    </label>
-                    <select
-                      id="destination_city"
-                      name="destination_city"
-                      value={formData.destination_city}
-                      onChange={handleChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-black focus:outline-none text-black"
-                      required
-                    >
-                      <option value="">Select Destination City</option>
-                      <option value="Delhi">Delhi</option>
-                      <option value="Mumbai">Mumbai</option>
-                      <option value="Bangalore">Bangalore</option>
-                      <option value="Kolkata">Kolkata</option>
-                      <option value="Hyderabad">Hyderabad</option>
-                      <option value="Chennai">Chennai</option>
-                    </select>
-                    <button
-                      type="button"
-                      onClick={swapCities}
-                      title="Swap cities"
-                      className="absolute right-2 top-9 bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition-colors"
-                    >
-                      <FaExchangeAlt className="text-black" />
-                    </button>
-                  </div>
-
-                  {/* Time & Class */}
-                  <div>
-                    <label className="text-sm font-medium mb-2 flex items-center text-gray-800">
-                      <FaClock className="mr-2 text-black" /> Departure Time
-                    </label>
-                    <select
-                      id="departure_time"
-                      name="departure_time"
-                      value={formData.departure_time}
-                      onChange={handleChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-black focus:outline-none text-black"
-                      required
-                    >
-                      <option value="">Select Departure Time</option>
-                      <option value="Early_Morning">Early Morning (12AM-6AM)</option>
-                      <option value="Morning">Morning (6AM-12PM)</option>
-                      <option value="Afternoon">Afternoon (12PM-6PM)</option>
-                      <option value="Evening">Evening (6PM-12AM)</option>
-                      <option value="Night">Night (10PM-12AM)</option>
-                      <option value="Late_Night">Late Night (10PM-12AM)</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium mb-2 flex items-center text-gray-800">
-                      <FaClock className="mr-2 text-black" /> Arrival Time
-                    </label>
-                    <select
-                      id="arrival_time"
-                      name="arrival_time"
-                      value={formData.arrival_time}
-                      onChange={handleChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-black focus:outline-none text-black"
-                      required
-                    >
-                      <option value="">Select Arrival Time</option>
-                      <option value="Early_Morning">Early Morning (12AM-6AM)</option>
-                      <option value="Morning">Morning (6AM-12PM)</option>
-                      <option value="Afternoon">Afternoon (12PM-6PM)</option>
-                      <option value="Evening">Evening (6PM-12AM)</option>
-                      <option value="Night">Night (10PM-12AM)</option>
-                      <option value="Late_Night">Late Night (10PM-12AM)</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium mb-2 flex items-center text-gray-800">
-                      <FaPlane className="mr-2 text-black" /> Number of Stops
-                    </label>
-                    <select
-                      id="stops"
-                      name="stops"
-                      value={formData.stops}
-                      onChange={handleChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-black focus:outline-none text-black"
-                      required
-                    >
-                      <option value="">Select Number of Stops</option>
-                      <option value="zero">Non-stop</option>
-                      <option value="one">1 Stop</option>
-                      <option value="two_or_more">2+ Stops</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium mb-2 flex items-center text-gray-800">
-                      <FaChair className="mr-2 text-black" /> Class
-                    </label>
-                    <select
-                      id="class"
-                      name="class"
-                      value={formData.class}
-                      onChange={handleChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-black focus:outline-none text-black"
-                      required
-                    >
-                      <option value="">Select Class</option>
-                      <option value="Economy">Economy</option>
-                      <option value="Business">Business</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium mb-2 flex items-center text-gray-800">
-                      <FaCalendarAlt className="mr-2 text-black" /> Departure Date
-                    </label>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1">Departure Date</label>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <FaCalendarAlt className="text-gray-400 group-focus-within:text-black transition-colors" />
+                    </div>
                     <input
                       type="date"
                       id="departure_date"
@@ -500,195 +371,357 @@ function App() {
                       value={formData.departure_date}
                       onChange={handleChange}
                       min={new Date().toISOString().split("T")[0]}
-                      className="w-full p-3 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-black focus:outline-none text-black"
+                      className="w-full pl-10 pr-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white text-gray-900 focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all duration-200 cursor-pointer"
                       required
                     />
                   </div>
                 </div>
 
-                {/* Submit */}
-                <div className="flex justify-center">
+                <div className="space-y-2 relative">
+                  <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1">From</label>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <FaCity className="text-gray-400 group-focus-within:text-black transition-colors" />
+                    </div>
+                    <select
+                      id="source_city"
+                      name="source_city"
+                      value={formData.source_city}
+                      onChange={handleChange}
+                      className="w-full pl-10 pr-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white text-gray-900 focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all duration-200 appearance-none cursor-pointer"
+                      required
+                    >
+                      <option value="">Select Source</option>
+                      <option value="Delhi">Delhi</option>
+                      <option value="Mumbai">Mumbai</option>
+                      <option value="Bangalore">Bangalore</option>
+                      <option value="Kolkata">Kolkata</option>
+                      <option value="Hyderabad">Hyderabad</option>
+                      <option value="Chennai">Chennai</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="space-y-2 relative">
+                  <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1">To</label>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <FaMapMarkerAlt className="text-gray-400 group-focus-within:text-black transition-colors" />
+                    </div>
+                    <select
+                      id="destination_city"
+                      name="destination_city"
+                      value={formData.destination_city}
+                      onChange={handleChange}
+                      className="w-full pl-10 pr-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white text-gray-900 focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all duration-200 appearance-none cursor-pointer"
+                      required
+                    >
+                      <option value="">Select Destination</option>
+                      <option value="Delhi">Delhi</option>
+                      <option value="Mumbai">Mumbai</option>
+                      <option value="Bangalore">Bangalore</option>
+                      <option value="Kolkata">Kolkata</option>
+                      <option value="Hyderabad">Hyderabad</option>
+                      <option value="Chennai">Chennai</option>
+                    </select>
+                  </div>
+
                   <button
-                    type="submit"
-                    disabled={loading}
-                    className="bg-black text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-800 focus:ring-2 focus:ring-black focus:ring-offset-2 transition-all duration-300 flex items-center disabled:opacity-50"
+                    type="button"
+                    onClick={swapCities}
+                    title="Swap cities"
+                    className="absolute right-0 md:-left-8 md:right-auto md:top-[42px] top-8 z-10 bg-white border border-gray-200 shadow-md p-2 rounded-full hover:bg-black hover:text-white hover:border-black transition-all duration-300 transform hover:rotate-180 active:scale-90"
                   >
-                    {loading ? (
-                      <>
-                        <FaSpinner className="animate-spin mr-2" /> Predicting...
-                      </>
-                    ) : (
-                      <>
-                        <FaMoneyBillWave className="mr-2" /> Predict Flight Price
-                      </>
-                    )}
+                    <FaExchangeAlt className="text-xs md:text-sm" />
                   </button>
                 </div>
-              </form>
-            </div>
 
-            {/* Prediction Result */}
-            {prediction && (
-              <div className="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-all">
-                <h2 className="text-2xl font-semibold text-black mb-4 flex items-center border-b border-dashed border-gray-400 pb-2">
-                  <FaMoneyBillWave className="mr-2 text-black" />
-                  Prediction Result
-                </h2>
-                <div className="text-center p-6 bg-gray-100 rounded-xl border border-gray-300">
-                  <p className="text-4xl font-bold text-black mb-2">
-                    ₹{prediction.prediction?.toLocaleString("en-IN")}
-                  </p>
-                  <p className="text-gray-700">Estimated Flight Price</p>
-                </div>
-              </div>
-            )}
-
-            {/* Chart */}
-            <div className="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-all">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-black flex items-center">
-                  <FaChartLine className="mr-2 text-black" />
-                  7-Day Price Forecast
-                </h3>
-                <div className="flex items-center space-x-2">
-                  {chartLoading && (
-                    <div className="flex items-center text-sm text-gray-700">
-                      <FaSpinner className="animate-spin mr-1" /> Loading...
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1">Departure Time</label>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <FaClock className="text-gray-400 group-focus-within:text-black transition-colors" />
                     </div>
-                  )}
-                  <div className="flex space-x-2">
-                    <button
-                      onClick={() => setChartType("line")}
-                      className={`px-3 py-1 rounded text-sm ${
-                        chartType === "line"
-                          ? "bg-black text-white"
-                          : "bg-gray-200 text-black"
-                      }`}
+                    <select
+                      id="departure_time"
+                      name="departure_time"
+                      value={formData.departure_time}
+                      onChange={handleChange}
+                      className="w-full pl-10 pr-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white text-gray-900 focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all duration-200 appearance-none cursor-pointer"
+                      required
                     >
-                      Line
-                    </button>
-                    <button
-                      onClick={() => setChartType("histogram")}
-                      className={`px-3 py-1 rounded text-sm ${
-                        chartType === "histogram"
-                          ? "bg-black text-white"
-                          : "bg-gray-200 text-black"
-                      }`}
+                      <option value="">Select Time</option>
+                      <option value="Early_Morning">Early Morning (12AM-6AM)</option>
+                      <option value="Morning">Morning (6AM-12PM)</option>
+                      <option value="Afternoon">Afternoon (12PM-6PM)</option>
+                      <option value="Evening">Evening (6PM-12AM)</option>
+                      <option value="Night">Night (10PM-12AM)</option>
+                      <option value="Late_Night">Late Night (10PM-12AM)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1">Arrival Time</label>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <FaClock className="text-gray-400 group-focus-within:text-black transition-colors" />
+                    </div>
+                    <select
+                      id="arrival_time"
+                      name="arrival_time"
+                      value={formData.arrival_time}
+                      onChange={handleChange}
+                      className="w-full pl-10 pr-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white text-gray-900 focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all duration-200 appearance-none cursor-pointer"
+                      required
                     >
-                      Bar
-                    </button>
+                      <option value="">Select Time</option>
+                      <option value="Early_Morning">Early Morning (12AM-6AM)</option>
+                      <option value="Morning">Morning (6AM-12PM)</option>
+                      <option value="Afternoon">Afternoon (12PM-6PM)</option>
+                      <option value="Evening">Evening (6PM-12AM)</option>
+                      <option value="Night">Night (10PM-12AM)</option>
+                      <option value="Late_Night">Late Night (10PM-12AM)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1">Stops</label>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <FaPlane className="text-gray-400 group-focus-within:text-black transition-colors" />
+                    </div>
+                    <select
+                      id="stops"
+                      name="stops"
+                      value={formData.stops}
+                      onChange={handleChange}
+                      className="w-full pl-10 pr-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white text-gray-900 focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all duration-200 appearance-none cursor-pointer"
+                      required
+                    >
+                      <option value="">Select Stops</option>
+                      <option value="zero">Non-stop</option>
+                      <option value="one">1 Stop</option>
+                      <option value="two_or_more">2+ Stops</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1">Class</label>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <FaChair className="text-gray-400 group-focus-within:text-black transition-colors" />
+                    </div>
+                    <select
+                      id="class"
+                      name="class"
+                      value={formData.class}
+                      onChange={handleChange}
+                      className="w-full pl-10 pr-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white text-gray-900 focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all duration-200 appearance-none cursor-pointer"
+                      required
+                    >
+                      <option value="">Select Class</option>
+                      <option value="Economy">Economy</option>
+                      <option value="Business">Business</option>
+                    </select>
                   </div>
                 </div>
               </div>
 
-              {formData.departure_date ? (
-                <div className="h-64">
-                  {priceHistoryData.length > 0 ? (
-                    chartType === "line" ? (
-                      <Line data={chartData} options={chartOptions} />
-                    ) : (
-                      <Bar data={chartData} options={chartOptions} />
-                    )
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full bg-black text-white font-bold py-4 px-8 rounded-xl hover:bg-gray-800 active:scale-[0.99] focus:ring-4 focus:ring-gray-300 transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed group"
+                >
+                  {loading ? (
+                    <>
+                      <FaSpinner className="animate-spin mr-3 text-lg" /> 
+                      <span>Processing AI Model...</span>
+                    </>
                   ) : (
-                    <div className="h-full flex items-center justify-center text-gray-700">
-                      {chartLoading ? "Loading chart data..." : "No data available"}
-                    </div>
+                    <>
+                      <FaMoneyBillWave className="mr-3 text-lg group-hover:scale-110 transition-transform" /> 
+                      <span>Get Price Estimate</span>
+                    </>
                   )}
-                </div>
-              ) : (
-                <div className="h-64 flex items-center justify-center text-gray-700 bg-gray-100 rounded-lg">
-                  Select a departure date to see price forecast
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-3xl shadow-xl shadow-gray-200/60 p-6 md:p-8 border border-gray-100">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-6">
+            <h3 className="text-xl font-bold text-black flex items-center mb-4 md:mb-0">
+              <span className="bg-gray-100 p-2 rounded-lg mr-3">
+                 <FaChartLine className="text-gray-800" />
+              </span>
+              7-Day Forecast
+            </h3>
+            
+            <div className="flex items-center space-x-4 bg-gray-50 p-1.5 rounded-lg border border-gray-200">
+              {chartLoading && (
+                <div className="flex items-center text-xs text-gray-500 px-2">
+                  <FaSpinner className="animate-spin mr-1.5" /> Loading...
                 </div>
               )}
+              <div className="flex space-x-1">
+                <button
+                  onClick={() => setChartType("line")}
+                  className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
+                    chartType === "line"
+                      ? "bg-white text-black shadow-sm ring-1 ring-black/5"
+                      : "text-gray-500 hover:text-black hover:bg-gray-100"
+                  }`}
+                >
+                  Line
+                </button>
+                <button
+                  onClick={() => setChartType("histogram")}
+                  className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
+                    chartType === "histogram"
+                      ? "bg-white text-black shadow-sm ring-1 ring-black/5"
+                      : "text-gray-500 hover:text-black hover:bg-gray-100"
+                  }`}
+                >
+                  Bar
+                </button>
+              </div>
             </div>
           </div>
 
-          {/* Right Section */}
-          <div className="space-y-6">
-            {/* History */}
-            <div className="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-all">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-black flex items-center">
-                  <FaHistory className="mr-2 text-black" />
-                  Prediction History
-                </h3>
-                {predictionHistory.length > 0 && (
-                  <button
-                    onClick={clearHistory}
-                    className="text-red-600 hover:text-red-800 text-sm flex items-center"
-                    title="Clear history"
-                  >
-                    <FaTrash className="mr-1" /> Clear
-                  </button>
+          <div className="relative min-h-[300px] w-full bg-gray-50 rounded-2xl border border-dashed border-gray-200 p-4 flex flex-col justify-center">
+            {formData.departure_date ? (
+              <>
+                {priceHistoryData.length > 0 ? (
+                  <div className="h-72 w-full">
+                    {chartType === "line" ? (
+                      <Line data={chartData} options={chartOptions} />
+                    ) : (
+                      <Bar data={chartData} options={chartOptions} />
+                    )}
+                  </div>
+                ) : (
+                  <div className="text-center text-gray-400">
+                    <FaChartLine className="text-4xl mx-auto mb-2 opacity-20" />
+                    <p>{chartLoading ? "Fetching data..." : "No historical data found for this route."}</p>
+                  </div>
                 )}
+              </>
+            ) : (
+              <div className="text-center text-gray-400">
+                <FaCalendarAlt className="text-4xl mx-auto mb-2 opacity-20" />
+                <p>Select a date to view price trends</p>
               </div>
+            )}
+          </div>
+        </div>
+      </div>
 
-              {predictionHistory.length === 0 ? (
-                <p className="text-gray-700 text-center py-4">
-                  No prediction history yet
-                </p>
-              ) : (
-                <div className="space-y-3 max-h-96 overflow-y-auto">
-                  {predictionHistory.map((item) => (
-                    <div
-                      key={item.id}
-                      className="p-3 bg-gray-100 rounded-lg border border-gray-300 hover:border-gray-500 transition-colors"
-                    >
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <div className="font-medium text-black">
-                            {item.details.source_city} →{" "}
-                            {item.details.destination_city}
-                          </div>
-                          <div className="text-xs text-gray-700 mt-1">
-                            {new Date(item.timestamp).toLocaleDateString()} •{" "}
-                            {item.details.airline}
-                          </div>
-                        </div>
-                        <div className="font-bold text-black text-right">
-                          ₹{item.prediction?.toLocaleString("en-IN")}
-                        </div>
+      <div className="lg:col-span-4 space-y-6">
+        {prediction && (
+          <div className="bg-gray-900 text-white rounded-3xl shadow-xl shadow-gray-400/30 p-8 border border-gray-800 transform transition-all duration-500 hover:scale-[1.02] relative overflow-hidden">
+            <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-gray-800 rounded-full blur-2xl opacity-50"></div>
+            <h2 className="text-lg font-medium text-gray-300 mb-6 flex items-center border-b border-gray-700 pb-3">
+              <FaMoneyBillWave className="mr-3" />
+              Estimated Price
+            </h2>
+            <div className="text-center relative z-10">
+              <p className="text-5xl md:text-6xl font-bold mb-2 tracking-tight">
+                ₹{prediction.prediction?.toLocaleString("en-IN")}
+              </p>
+              <p className="text-gray-400 text-sm uppercase tracking-widest mt-2">
+                One way per person
+              </p>
+            </div>
+          </div>
+        )}
+
+        <div className="bg-white rounded-3xl shadow-lg shadow-gray-200/50 p-6 border border-gray-100 flex flex-col h-[400px]">
+          <div className="flex justify-between items-center mb-4 pb-2 border-b border-gray-100">
+            <h3 className="text-lg font-bold text-black flex items-center">
+              <FaHistory className="mr-2 text-gray-600" />
+              Recent Searches
+            </h3>
+            {predictionHistory.length > 0 && (
+              <button
+                onClick={clearHistory}
+                className="text-red-500 hover:text-red-700 text-xs font-semibold uppercase tracking-wider bg-red-50 hover:bg-red-100 px-3 py-1 rounded-full transition-colors flex items-center"
+              >
+                <FaTrash className="mr-1.5" /> Clear
+              </button>
+            )}
+          </div>
+
+          <div className="flex-1 overflow-y-auto pr-2 space-y-3 custom-scrollbar">
+            {predictionHistory.length === 0 ? (
+              <div className="h-full flex flex-col items-center justify-center text-gray-400 opacity-60">
+                <FaHistory className="text-3xl mb-2" />
+                <p className="text-sm">No history yet</p>
+              </div>
+            ) : (
+              predictionHistory.map((item) => (
+                <div
+                  key={item.id}
+                  className="group p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-black/10 hover:bg-white hover:shadow-md transition-all duration-200 cursor-default"
+                >
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <div className="font-bold text-sm text-black flex items-center gap-2">
+                        {item.details.source_city} <FaPlane className="text-xs text-gray-400 transform rotate-90" /> {item.details.destination_city}
+                      </div>
+                      <div className="text-xs text-gray-500 mt-1.5 flex flex-wrap gap-2">
+                        <span className="bg-gray-200 px-1.5 py-0.5 rounded text-[10px] font-medium">{new Date(item.timestamp).toLocaleDateString()}</span>
+                        <span className="bg-gray-200 px-1.5 py-0.5 rounded text-[10px] font-medium">{item.details.airline}</span>
                       </div>
                     </div>
-                  ))}
+                    <div className="font-bold text-black text-lg group-hover:text-green-600 transition-colors">
+                      ₹{item.prediction?.toLocaleString("en-IN")}
+                    </div>
+                  </div>
                 </div>
-              )}
-            </div>
+              ))
+            )}
+          </div>
+        </div>
 
-            {/* Tips */}
-            <div className="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-all">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-black flex items-center">
-                  <FaInfoCircle className="mr-2 text-black" />
-                  Booking Tips
-                </h3>
-                <button
-                  onClick={() => setShowTips(!showTips)}
-                  className="text-black hover:text-gray-700 text-sm font-medium flex items-center"
-                >
-                  {showTips ? "Hide Tips" : "Show Tips"}
-                </button>
-              </div>
+        <div className="bg-white rounded-3xl shadow-lg shadow-gray-200/50 p-6 border border-gray-100">
+          <div className="flex justify-between items-center cursor-pointer" onClick={() => setShowTips(!showTips)}>
+            <h3 className="text-lg font-bold text-black flex items-center">
+              <FaInfoCircle className="mr-2 text-gray-600" />
+              Smart Travel Tips
+            </h3>
+            <button className="text-gray-400 hover:text-black transition-colors">
+              {showTips ? "−" : "+"}
+            </button>
+          </div>
 
-              {showTips && (
-                <div className="bg-gray-100 p-4 rounded-lg border border-gray-300">
-                  <h4 className="font-semibold text-black mb-2">
-                    Best Booking Practices
-                  </h4>
-                  <ul className="text-sm text-gray-700 list-disc list-inside space-y-1">
-                    <li>Book 6-8 weeks in advance for best prices</li>
-                    <li>Tuesday and Wednesday flights are often cheaper</li>
-                    <li>Early morning flights tend to be less expensive</li>
-                    <li>Be flexible with dates for additional savings</li>
-                    <li>Set price alerts for your preferred routes</li>
-                  </ul>
-                </div>
-              )}
+          <div className={`overflow-hidden transition-all duration-300 ease-in-out ${showTips ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0"}`}>
+            <div className="bg-blue-50/50 p-5 rounded-xl border border-blue-100">
+              <ul className="space-y-3">
+                {[
+                  "Book 6-8 weeks in advance",
+                  "Mid-week flights (Tue/Wed) are cheaper",
+                  "Early morning flights save money",
+                  "Be flexible with dates (+/- 3 days)",
+                  "Set alerts for price drops"
+                ].map((tip, idx) => (
+                  <li key={idx} className="flex items-start text-sm text-gray-700">
+                    <span className="inline-block w-1.5 h-1.5 bg-blue-400 rounded-full mt-1.5 mr-2.5 flex-shrink-0"></span>
+                    {tip}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
   );
 }
 
