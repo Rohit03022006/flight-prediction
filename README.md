@@ -5,8 +5,6 @@ This project predicts flight ticket prices based on user input such as airline, 
 
 ![Flight Price Prediction Web Page](https://github.com/Rohit03022006/flight-prediction/blob/main/Flight%20Price%20Prediction%20Web%20page.PNG?raw=true)
 
-![Flight Price Prediction](https://github.com/Rohit03022006/flight-prediction/blob/main/Flight%20Price%20Prediction.png?raw=true)
-
 ---
 ## Features
 
